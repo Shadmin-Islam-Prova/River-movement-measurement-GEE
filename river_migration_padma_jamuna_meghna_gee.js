@@ -3,8 +3,8 @@
 // GEE
 var EPOCHS = [1990, 1995, 2000, 2005, 2010, 2015, 2020, 2025];
 var DRY_START_MONTH = 12;    var DRY_END_MONTH = 3;
-var MAX_CLOUD = 60;           // cloud cover limit (in %)
-var MIN_PATCH_PIXELS = 500;   // water patches smaller than this are removed (500 px = 0.45 km2)
+var MAX_CLOUD = 60;           // cloud cover limit in %
+var MIN_PATCH_PIXELS = 500;   // water patches smaller than 500 px are removed (500 px = 0.45 km2)
 var USE_OTSU = true;          // true = Otsu threshold per epoch
 var FIXED_THRESHOLD = 0.0;    // used only when USE_OTSU = false
 var STRIP_STEP = 0.02;        // strip width in degree
