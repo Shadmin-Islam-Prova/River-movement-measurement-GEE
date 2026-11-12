@@ -13,14 +13,15 @@ var CRS = 'EPSG:32646';       // UTM zone 46N
 var DRIVE_FOLDER = 'GEE_river_migration';
 
 // RIVER REACHES 
-// 'NS' = river flows north to south, strips are cut across latitude.
+// 'NS' = river flows north to south, strips are cut across latitude
 
 
-// 'EW' = river flows west to east, strips are cut across longitude.
-// Jamuna: Bangladesh border to 24.05 N (just above the Padma confluence).
+// 'EW' = river flows west to east, strips are cut across longitude
+// Jamuna: Bangladesh border to 24.05 N (just above the Padma confluence)
 var reachInfo = [
   {name: 'Jamuna', orient: 'NS', coords: [[89.45, 25.90], [90.00, 25.90], [90.00, 24.05], [89.45, 24.05]]},
 
   // Padma: Ganges entry near Chapai Nawabganj to the Meghna confluence at Chandpur.
  {name: 'Padma', orient: 'EW', coords: [[88.10, 24.90], [88.65, 24.55], [89.05, 24.25], [89.45, 24.05], [90.00, 24.05], [90.30, 23.65], [90.68, 23.38], [90.52, 23.15], [90.15, 23.30], [89.70, 23.65],
     [89.00, 23.90], [88.55, 24.20], [88.05, 24.60]]},
+// Meghna: Bhairab to 22.6 N (north of Bhola)
