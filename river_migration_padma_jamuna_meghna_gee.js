@@ -19,9 +19,7 @@ var DRIVE_FOLDER = 'GEE_river_migration';
 // 'EW' = river flows west to east, strips are cut across longitude.
 // Jamuna: Bangladesh border to 24.05 N (just above the Padma confluence).
 var reachInfo = [
-  {name: 'Jamuna', orient: 'NS', coords: [
-    [89.45, 25.90], [90.00, 25.90], [90.00, 24.05], [89.45, 24.05]]},
+  {name: 'Jamuna', orient: 'NS', coords: [[89.45, 25.90], [90.00, 25.90], [90.00, 24.05], [89.45, 24.05]]},
 
   // Padma: Ganges entry near Chapai Nawabganj to the Meghna confluence at Chandpur.
- {name: 'Padma', orient: 'EW', coords: [
-    [88.10, 24.90], [88.65, 24.55], [89.05, 24.25], [89.45, 24.05], [90.00, 24.05],
+ {name: 'Padma', orient: 'EW', coords: [[88.10, 24.90], [88.65, 24.55], [89.05, 24.25], [89.45, 24.05], [90.00, 24.05], 
