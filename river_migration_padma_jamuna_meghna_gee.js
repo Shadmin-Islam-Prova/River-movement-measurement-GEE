@@ -28,3 +28,9 @@ var reachInfo = [
   {name: 'Meghna', orient: 'NS', coords: [[90.80, 24.15], [91.10, 24.15], [90.95, 23.60], [90.85, 23.25], [91.05, 22.60],
     [90.45, 22.60], [90.52, 23.15], [90.68, 23.38], [90.55, 23.62]]}
 ];
+
+var reaches = ee.FeatureCollection(reachInfo.map(function(r) {
+  return ee.Feature(ee.Geometry.Polygon([r.coords], null, false),
+                    {reach: r.name, orient: r.orient});
+}));
+var studyArea = reaches.geometry();
