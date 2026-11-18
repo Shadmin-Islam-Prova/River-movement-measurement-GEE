@@ -34,3 +34,13 @@ var reaches = ee.FeatureCollection(reachInfo.map(function(r) {
                     {reach: r.name, orient: r.orient});
 }));
 var studyArea = reaches.geometry();
+// LANDSAT Image Acquisition 
+function cloudMask(img) {
+  var qa = img.select('QA_PIXEL');
+  // bit 1 = dilated cloud, bit 3 = cloud, bit 4 = cloud shadow
+  var clear = qa.bitwiseAnd(1 << 1).eq(0)
+    .and(qa.bitwiseAnd(1 << 3).eq(0))
+    .and(qa.bitwiseAnd(1 << 4).eq(0));
+  var notSaturated = img.select('QA_RADSAT').eq(0);
+  return clear.and(notSaturated);
+}
