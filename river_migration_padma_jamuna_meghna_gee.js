@@ -49,3 +49,5 @@ function cloudMask(img) {
 function prepL57(img) {
   var sr = img.select(['SR_B1', 'SR_B2', 'SR_B3', 'SR_B4', 'SR_B5', 'SR_B7'],
                       ['Blue', 'Green', 'Red', 'NIR', 'SWIR1', 'SWIR2']) .multiply(0.0000275).add(-0.2);
+ return ee.Image(sr.updateMask(cloudMask(img))
+                    .copyProperties(img, ['system:time_start']));
