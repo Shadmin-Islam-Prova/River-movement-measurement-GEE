@@ -18,7 +18,8 @@ var DRIVE_FOLDER = 'GEE_river_migration';
 
 // 'EW' = river flows west to east, strips are cut across longitude
 // Jamuna: Bangladesh border to 24.05 N (just above the Padma confluence)
-var reachInfo = [
+var reachInfo = 
+  [
   {name: 'Jamuna', orient: 'NS', coords: [[89.45, 25.90], [90.00, 25.90], [90.00, 24.05], [89.45, 24.05]]},
 
   // Padma: Ganges entry near Chapai Nawabganj to the Meghna confluence at Chandpur.
@@ -29,13 +30,15 @@ var reachInfo = [
     [90.45, 22.60], [90.52, 23.15], [90.68, 23.38], [90.55, 23.62]]}
 ];
 
-var reaches = ee.FeatureCollection(reachInfo.map(function(r) {
+var reaches = ee.FeatureCollection(reachInfo.map(function(r) 
+                                                 {
   return ee.Feature(ee.Geometry.Polygon([r.coords], null, false),
                     {reach: r.name, orient: r.orient});
 }));
 var studyArea = reaches.geometry();
 // LANDSAT Image Acquisition 
-function cloudMask(img) {
+function cloudMask(img) 
+{
   var qa = img.select('QA_PIXEL');
   // bit 1 = dilated cloud, bit 3 = cloud, bit 4 = cloud shadow
   var clear = qa.bitwiseAnd(1 << 1).eq(0)
@@ -46,8 +49,16 @@ function cloudMask(img) {
 }
 
 // Landsat 5 TM and Landsat 7 ETM+
-function prepL57(img) {
+function prepL57(img) 
+{
   var sr = img.select(['SR_B1', 'SR_B2', 'SR_B3', 'SR_B4', 'SR_B5', 'SR_B7'],
                       ['Blue', 'Green', 'Red', 'NIR', 'SWIR1', 'SWIR2']) .multiply(0.0000275).add(-0.2);
  return ee.Image(sr.updateMask(cloudMask(img))
                     .copyProperties(img, ['system:time_start']));
+  }
+ 
+// Landsat 8 and 9 OLI
+function prepL89(img) {
+  var sr = img.select(['SR_B2', 'SR_B3', 'SR_B4', 'SR_B5', 'SR_B6', 'SR_B7'],
+                      ['Blue', 'Green', 'Red', 'NIR', 'SWIR1', 'SWIR2'])
+              .multiply(0.0000275).add(-0.2);
