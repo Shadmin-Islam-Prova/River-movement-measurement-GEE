@@ -61,4 +61,4 @@ function prepL57(img)
 function prepL89(img) {
   var sr = img.select(['SR_B2', 'SR_B3', 'SR_B4', 'SR_B5', 'SR_B6', 'SR_B7'],
                       ['Blue', 'Green', 'Red', 'NIR', 'SWIR1', 'SWIR2'])
-              .multiply(0.0000275).add(-0.2);
+              .multiply(0.0000275).add(-0.2); 
