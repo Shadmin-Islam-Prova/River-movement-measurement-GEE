@@ -65,3 +65,27 @@ function prepL89(img) {
    return ee.Image(sr.updateMask(cloudMask(img))
                     .copyProperties(img, ['system:time_start']));
 }
+// Landsat 8 and 9 OLI
+function prepL89(img) {
+  var sr = img.select(['SR_B2', 'SR_B3', 'SR_B4', 'SR_B5', 'SR_B6', 'SR_B7'],
+                      ['Blue', 'Green', 'Red', 'NIR', 'SWIR1', 'SWIR2'])
+              .multiply(0.0000275).add(-0.2);
+  return ee.Image(sr.updateMask(cloudMask(img))
+                    .copyProperties(img, ['system:time_start']));
+}
+ 
+// Dry-season images from Dec (year-1) to Mar (year+1).
+// This uses two dry seasons around each epoch year.
+function landsatDry(year) {
+  var start = ee.Date.fromYMD(year - 1, 12, 1);
+  var end = ee.Date.fromYMD(year + 1, 4, 1);
+  var filt = ee.Filter.and(
+    ee.Filter.bounds(studyArea),
+    ee.Filter.date(start, end),
+    ee.Filter.calendarRange(DRY_START_MONTH, DRY_END_MONTH, 'month'),
+    ee.Filter.lt('CLOUD_COVER', MAX_CLOUD));
+ 
+  var col = ee.ImageCollection('LANDSAT/LT05/C02/T1_L2').filter(filt).map(prepL57)
+    .merge(ee.ImageCollection('LANDSAT/LC08/C02/T1_L2').filter(filt).map(prepL89))
+    .merge(ee.ImageCollection('LANDSAT/LC09/C02/T1_L2').filter(filt).map(prepL89));
+ 
