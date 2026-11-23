@@ -43,11 +43,11 @@ Outputs will be saved to the Google Drive folder `GEE_river_migration`.
 
 ## Limitations
 
-- Landsat resolution is 30 m. Small channels and thin erosion edges may not be detected.
-- The Jamuna is a braided river. The dry-season water edge is the active channel edge, which may differ from the high bank line.
+- Landsat resolution is 30 m. Small channels and thin erosion edges might not be detected.
+- Jamuna is a braided river. The dry-season water edge is the active channel edge, which may differ from the high bank line.
 - Cloud cover can leave some epochs with few usable images.
 - Reach boundaries are approximate.
-- Results have not yet been checked against an independent dataset.
+- Results have not been checked against an independent dataset or against primary field data.
 
 ## Status
 
