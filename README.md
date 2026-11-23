@@ -33,3 +33,26 @@ Outputs will be saved to the Google Drive folder `GEE_river_migration`.
 | `River_area_erosion_accretion.csv` | Water area, erosion and accretion (km²) for each reach and period |
 | `River_banks_Jamuna.csv`, `River_banks_Padma.csv`, `River_banks_Meghna.csv` | Bank positions (metres, UTM 46N) for each strip and epoch |
 | `River_water_masks.tif` (optional) | Water maps for each epoch, for use in QGIS or ArcGIS |
+
+## Calculating migration rates
+
+- Bank shift = bank position (year 2) − bank position (year 1)
+- Migration rate = bank shift ÷ (year 2 − year 1), in m/yr
+- Channel belt width = max − min
+- For E columns, a positive shift means the bank moved east. For N columns, a positive shift means the bank moved north.
+
+## Limitations
+
+- Landsat resolution is 30 m. Small channels and thin erosion edges may not be detected.
+- The Jamuna is a braided river. The dry-season water edge is the active channel edge, which may differ from the high bank line.
+- Cloud cover can leave some epochs with few usable images.
+- Reach boundaries are approximate.
+- Results have not yet been checked against an independent dataset.
+
+## Status
+
+- The script has passed a syntax check.
+- [ ] Full run in Google Earth Engine
+- [ ] Check water masks visually for each epoch
+- [ ] Validate water masks against an independent dataset (for example, JRC Global Surface Water)
+- [ ] Check bank positions against high-resolution imagery
