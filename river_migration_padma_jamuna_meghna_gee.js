@@ -74,8 +74,7 @@ function prepL89(img) {
                     .copyProperties(img, ['system:time_start']));
 }
  
-// Dry-season images from Dec (year-1) to Mar (year+1).
-// This uses two dry seasons around each epoch year.
+// Dry-season images from Dec (year-1) to Mar (year+1). Two dry seasons each epoch.
 function landsatDry(year) {
   var start = ee.Date.fromYMD(year - 1, 12, 1);
   var end = ee.Date.fromYMD(year + 1, 4, 1);
@@ -89,3 +88,9 @@ function landsatDry(year) {
     .merge(ee.ImageCollection('LANDSAT/LC08/C02/T1_L2').filter(filt).map(prepL89))
     .merge(ee.ImageCollection('LANDSAT/LC09/C02/T1_L2').filter(filt).map(prepL89));
  
+ // Landsat 7 is used only up to 2012. After that Landsat 8/9 are enough.
+  if (year <= 2012) {
+    col = col.merge(ee.ImageCollection('LANDSAT/LE07/C02/T1_L2').filter(filt).map(prepL57));
+  }
+  return col;
+}
